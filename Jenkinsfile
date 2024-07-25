@@ -17,7 +17,6 @@ pipeline{
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
         SLACK_CHANNEL = '#operaciones'
-        #SLACK_CREDENTIAL_ID = 'slack-webhook-credential-id'
     }
 
     stages{
