@@ -16,6 +16,8 @@ pipeline{
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
+        SLACK_CHANNEL = '#operaciones'
+        #SLACK_CREDENTIAL_ID = 'slack-webhook-credential-id'
     }
 
     stages{
@@ -100,10 +102,19 @@ pipeline{
                     subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed", 
                     mimeType: 'text/html',to: "f.ortube@gmail.com"
             }
-         success {
-               emailext body: '''${SCRIPT, template="groovy-html.template"}''', 
+        success {
+            emailext body: '''${SCRIPT, template="groovy-html.template"}''', 
                     subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful", 
                     mimeType: 'text/html',to: "f.ortube@gmail.com"
-          }      
+          }  
+        always {
+            script {
+                slackSend(
+                    channel: env.SLACK_CHANNEL,
+                    color: (currentBuild.currentResult == 'SUCCESS') ? 'good' : 'danger',
+                    message: "${currentBuild.fullDisplayName} - Build #${currentBuild.number} ${currentBuild.result}: ${env.BUILD_URL}"
+                )
+            }
+        }     
     }
 }
