@@ -2,10 +2,12 @@ pipeline{
     agent{
         label "jenkins-agent"
     }
+
     tools {
         jdk 'Java17'
         maven 'Maven3'
     }
+    
     environment {
         APP_NAME = "complete-prodcution-e2e-pipeline"
         RELEASE = "1.0.0"
