@@ -11,7 +11,7 @@
         <h2>Esto es una prueba</h2>
         
         <!--<img src="https://cdn.pixabay.com/animation/2023/03/21/20/07/20-07-01-480_512.gif" alt="Jenkins Pipeline" width="150px"> -->
-        <img src="https://photos.fife.usercontent.google.com/pw/AP1GczMBztLBK0JXoPh_bGEHEG9RRSRTD-q4cyDjUwCD5ciAFf0S_0RTRw5q=w604-h404-s-no-gm?authuser=0" alt="Cuando eras cariñoso" class="center" width="800px">
+        <img src="https://awsbucketmilozone.s3.amazonaws.com/FB_IMG_1703262086773.jpg" alt="Cuando eras cariñoso" class="center" width="800px">
         <!--<img src="https://blog.syncitgroup.com/wp-content/uploads/2020/07/jenkins-pipeline.jpg" alt="Jenkins Pipeline" class="center" width="800px"> -->
         <p id="date-time"></p>
         <br>
@@ -34,45 +34,6 @@
         // Update the HTML element with the current date and time
         document.getElementById('date-time').innerText = dateTimeString;
     </script>
-    <script>
-        // Función para obtener el nombre del pod desde una API interna (si está disponible)
-        async function fetchPodName() {
-          try {
-            const response = await fetch('/api/pod-name');
-            if (!response.ok) throw new Error('Network response was not ok.');
-            const data = await response.json();
-            return data.podName;
-          } catch (error) {
-            console.error('Error fetching pod name:', error);
-            return 'unknown';
-          }
-        }
-    
-        // Función para actualizar el contenido de la página
-        async function updatePage() {
-          // Get the current date and time
-          var currentDate = new Date();
-          var dateTimeString = currentDate.toLocaleString([], {
-            weekday: 'long',
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true
-          });
-    
-          // Update the date and time
-          document.getElementById('date-time').innerText = dateTimeString;
-    
-          // Fetch and display the pod name
-          const podName = await fetchPodName();
-          document.getElementById('pod-name').innerText = podName;
-        }
-    
-        // Update the page content when it loads
-        window.onload = updatePage;
-      </script>
       <p>Fecha y hora actual: <span id="date-time"></span></p>
       <p>Servido desde el pod: <span id="pod-name"></span></p>
 </body>
